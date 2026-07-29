@@ -27,6 +27,11 @@ null::sysinit:/bin/ln -sf /proc/self/fd/1 /dev/stdout
 null::sysinit:/bin/ln -sf /proc/self/fd/2 /dev/stderr
 ::sysinit:/bin/hostname -F /etc/hostname
 
+# Configure network interface for webclient support
+::sysinit:/sbin/iplink set eth0 up
+::sysinit:/sbin/ipaddr add 192.168.86.100/24 dev eth0
+::sysinit:/sbin/iproute add default via 192.168.86.1
+
 # Enable SAK on ttyS0
 null::sysinit:/bin/setserial /dev/ttyS0 sak
 
